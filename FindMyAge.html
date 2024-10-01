@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Finder App</title>
+    <style>
+        *{
+            background-color: black;
+        }
+        h1{
+            background-color:#222521;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 20px;
+        }
+        h3{
+            background-color:violet;
+            padding: 0.6rem;
+            color: #222529;
+            margin-top: 2rem;
+            font-family: sans-serif;
+            display: inline-block;
+            border-top-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            border-bottom-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        #tt{
+            background-color: brown;
+            color: white;
+            outline: none;
+            border: none;
+            padding: 8px 2rem;
+            border-radius: 8px;
+            margin-left: 8px;
+        }
+        #inputTag{
+            color: aquamarine;
+            outline: black;
+            border: 2px solid gainsboro;
+            padding: 4px;
+            border-radius: 8px;
+        }
+        h4{
+            color:#222529;
+            font-weight: 700;
+            font-size: 2rem;
+            background-color: chartreuse;
+            padding: 1rem;
+            border-top-left-radius: 22px;
+            border-bottom-right-radius: 22px;
+            border-bottom-left-radius: 4px;
+            border-top-right-radius: 4px;
+            display: none;
+        }
+        h2{
+            background-color:aqua;
+            display: inline-block;
+            position: relative;
+            /* left: 5%; */
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0;
+            display: none;
+
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Age Finding Web App</h1>
+    <h3>ENTER YOUR DATE OF BIRTH</h3>
+    
+       <form action="">
+        <input type="date" name="" id="inputTag">
+        <input type="submit" id="tt">
+     </form>
+     <h2>O wow!</h2>
+     <h4 id="displayAge"></h4>
+
+     <script>
+
+        const myForm=document.querySelector("form");
+        const dateInput=document.querySelector("#inputTag");
+
+        myForm.addEventListener("submit",function(e){
+            //prevent server fefault behaivior
+            e.preventDefault();
+
+            //read date of birth from the user
+            const dobvalue=dateInput.value;
+            
+            //split datevalue in YYYY-MM-DD;
+
+            const [year, month, day] = dobvalue.split("-");
+
+            //prevent empty submiting
+
+            if(year ===undefined || month ===undefined || day===undefined){
+                document.querySelector("h2").style.display = "inline-block";
+                document.querySelector("h2").style.backgroundColor = "#e60000";
+                document.querySelector("h2").innerHTML = "Ops! You submited Empty";
+                return false;
+             }
+            
+            const currdate=new Date();
+            const curryear=currdate.getFullYear();
+            const currmonth=currdate.getMonth();
+            const currday=currdate.getDate();
+            // console.log(currday);
+            
+            
+            if(year > curryear){
+                document.querySelector("h2").style.display = "inline-block";
+                document.querySelector("h2").innerHTML = "What!";
+                document.querySelector("#displayAge").style.display = "block";
+                document.querySelector("#displayAge").innerHTML =`Oh My God! Are You a time Traveler?`;
+            }
+            else{
+                // console.log(`You Are ${curryear-year} Year ${currmonth-month} Month And ${currday-day} days Old`);
+                
+            document.querySelector("#displayAge").innerHTML = `You Are ${curryear-year} Year ${currmonth-month} Month And ${currday-day} days Old`;
+            document.querySelector("#displayAge").style.display = "block";
+            document.querySelector("h2").style.display = "inline-block";
+            }
+        });
+     </script>
+</body>
+</html>
+
+
